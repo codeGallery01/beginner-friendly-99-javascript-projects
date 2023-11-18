@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+    <style>
+        body{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: aqua;
+        }
+        #prj1Body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+        .prj1-btn{
+            border: 2px solid black;
+            cursor:pointer;
+            padding: 3px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="prj1Body" class="prj1-container">
+        <p class="prj1-description">Click on start to chang background color every second</p>
+        <div class="prj1-btns">
+            <h2 id="start" class="prj1-btn">START</h2>
+            <h2 id="stop" class="prj1-btn">STOP</h2>
+        </div>
+    </div>
+</body>
+<script>
+    const start = document.getElementById('start');
+    const stop = document.getElementById('stop');
+    const prj1Body = document.querySelector('#prj1Body')
+    const hex = "0123456789ABCDEF"
+    let startId = "";
+    start.addEventListener('click', () => {
+        if (!startId)
+            startId = setInterval(() => {
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += hex[Math.floor(Math.random() * 16)]
+                }
+                prj1Body.style.backgroundColor = color;
+            }, 1000);
+    })
+
+    stop.addEventListener('click', () => {
+        if (startId) {
+            clearInterval(startId);
+            startId = "";
+        }
+
+    })
+</script>
+
+</html>
